@@ -1,0 +1,69 @@
+<div class="row" style="margin-top: 20px">
+    <form class="col s12" [formGroup]="urlForm">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="icon_prefix" type="text" class="validate" formControlName="url" required>
+                <label for="icon_prefix">Please enter a valid url</label>
+                <div *ngIf="urlForm.controls['url'].hasError('required')" class="error-msg">
+                    Url is required.
+                </div>
+                <div *ngIf="urlForm.controls['url'].hasError('pattern')" class="error-msg">
+                    Url is invalid.
+                </div>
+            </div>
+            <div class="input-field col s6">
+                <div class="input-field col s3">
+                    <button type="submit" (click)="crawl()" [disabled]="urlForm.invalid" class="btn btn-success save-button">Crawl</button>
+                </div>
+                <div class="input-field col s6">
+                    <button type="submit" (click)="showResults()" [disabled]="urlForm.invalid" class="btn btn-success save-button">Show Results</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row" *ngIf="result">
+    <h5>Internal</h5>
+    <table class="responsive-table">
+        <thead>
+            <tr>
+                <td>Url</td>
+                <td>Protocol</td>
+                <td>Reachable</td>
+                <td>Status Code</td>
+                <td>message</td>
+                <td>Redirect</td>
+            </tr>
+        </thead>
+        <tr *ngFor="let detail of result.links.internal.details">
+            <td>{{detail.info.url}}</td>
+            <td>{{detail.info.protocol}}</td>
+            <td>{{detail.info.reachable}}</td>
+            <td>{{detail.info.redirection_details.statusCode}}</td>
+            <td>{{detail.info.redirection_details.message}}</td>
+            <td>{{detail.info.redirection_details.redirect}}</td>
+        </tr>
+    </table>
+    <h5>External</h5>
+    <table class="responsive-table">
+        <thead>
+            <tr>
+                <td>Url</td>
+                <td>Protocol</td>
+                <td>Reachable</td>
+                <td>Status Code</td>
+                <td>message</td>
+                <td>redirect</td>
+            </tr>
+        </thead>
+        <tr *ngFor="let detail of result.links.external.details">
+            <td>{{detail.info.url}}</td>
+            <td>{{detail.info.protocol}}</td>
+            <td>{{detail.info.reachable}}</td>
+            <td>{{detail.info.redirection_details.statusCode}}</td>
+            <td>{{detail.info.redirection_details.message}}</td>
+            <td>{{detail.info.redirection_details.redirect}}</td>
+        </tr>
+    </table>
+</div>
