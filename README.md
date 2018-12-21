@@ -2,13 +2,13 @@
 
 ## Building the application
 
-1. Navigate to the root direcoty `scout24`.
+1. Navigate to the root direcoty `web-clawler`.
 2. On Linux or Mac, run `./gradlw clean build`. For windows `gradlew.bat clean build`. This will build the application.
 3. Once the build is done, a uber jar will be created in `build/libs`.
 
 ## Running the application
 
-We can run the application by using `java -jar build/libs/scout24-0.0.1-SNAPSHOT.jar`.
+We can run the application by using `java -jar build/libs/web-clawler-0.0.1-SNAPSHOT.jar`.
 
 It will start the embedded Tomcat server on port `8080`.
 
